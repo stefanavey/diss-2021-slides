@@ -60,16 +60,6 @@ set.seed(1234)
 ```{r xaringan-themer, include = FALSE}
 
 library(xaringanthemer)
-## mono_accent(background_color = "#ffffff",
-##            text_color = "#212121",
-##            base_color = "#132E6F",
-##            link_color = "#00a0df",
-##            title_slide_background_color = "#ffffff",
-##            title_slide_text_color = "#212121",
-##            text_font_family = "Verdana",
-##            header_font_family = "Verdana",
-##            code_font_family = "Hack",
-##            header_font_weight = "bold")
 duo_accent(white_color = "#ffffff",
            black_color = "#212121",
            text_bold_color = "#7e2e7a",
