@@ -2,7 +2,7 @@
 title: Visualizing Activity Data from Wearable Devices in R to Create Personalized Activity Reports
 subtitle: Duke Industry Statistics Symposium
 date: "23 Apr 2021"
-author: "Stefan Avey <<savey@its.jnj.com>>"
+author: "Stefan Avey, Principal Scientist, Janssen R&D"
 output_dir: "."
 output:
   xaringan::moon_reader:
@@ -75,6 +75,17 @@ duo_accent(white_color = "#ffffff",
 
 ```
 
+# Disclaimer
+
+- The views presented in these slides are my own and do not necessarily reflect the position of my company (Johnson & Johnson).
+- All data displayed in this presentation are anonymized, sample, or simulated actigraphy data.
+
+???
+
+- Give some background on me personally to fill in the bio, if needed
+
+---
+
 # Fatigue and Sleep Disturbance are Prevalent Symptoms
 
 - Digital health technologies, such as activity trackers, may provide a novel way to measure impacts of fatigue and sleep disturbances in patients with chronic immune diseases.
@@ -131,6 +142,26 @@ duo_accent(white_color = "#ffffff",
   - Prevent biasing data
   - Ensure data privacy
   - Increase patient engagement (drive better compliance)
+
+---
+
+# Automated Creation of Activity Reports with Shiny
+
+- Internal Shiny app was built to interactively create participant reports
+
+<center>
+<img src="include/shiny_dashboard.png" height = "400">
+</center>
+
+???
+
+- Semi-Automated Workflow
+  - Export Data from ActiGraph (actigraphy vendor's) dashboard
+  - Upload data file into Shiny app
+  - Select months and participants
+  - Download a batch of activity reports
+  - Transferred from Janssen to the virtual site to add to participant app/web portal.
+- Workflow could be automated by pulling data from the vendor's API.
 
 ---
 
@@ -196,10 +227,10 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ---
 
-# Activity Report in Phase 0 Study
+# Example Plot in Activity Report
 
 .left-column[
-- R code to create the daily bar chart of step count
+- Daily plots of step count, sleep time, and time spent in moderate-to-vigorous physical activity (MVPA)
 ]
 
 .right-column[
@@ -210,14 +241,14 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 - Snapshot of average of the daily values for the entire month in calendar-like layout
 - Given only after study participants complete the daily and weekly patient reported outcomes.
+- A disclaimer was included: "This information in this report is for informational purposes only and not to be considered as medical advice. This information is not intended to diagnose, prescribe, treat, or cure any medical condition..."
 
 ---
 
-# Activity Report in Phase 0 Study
+# Example Plot in Activity Report
 
 .left-column[
-- Static PDF report with activity/sleep summary metrics
-- Providing 1 report to each study participant per month
+- R code to generate daily bar charts.
 ]
 
 .right-column[
@@ -247,35 +278,37 @@ ggplot(data = plot_data) +
 
 ---
 
-# Automated Creation of Activity Reports with Shiny
-
-- Internal R Shiny app was built to facilitate creating these reports
-
-<center>
-<img src="include/shiny_dashboard.png" height = "400">
-</center>
-
-???
-
-- Semi-Automated Workflow
-  - Export Data from ActiGraph (actigraphy vendor's) dashboard
-  - Upload data file into Shiny app
-  - Select months and participants
-  - Download a batch of activity reports
-  - Transferred from Janssen to the virtual site to add to participant app/web portal.
-- Workflow could be automated by pulling data from the vendor's API.
-
----
-
 # Future Directions - Towards Interactivity
 
-- Actigraphy data is rich in density and can be displayed in many different ways
+- Actigraphy data is rich in density (monthly, weekly, daily, minute-level, etc.) and can be displayed in many different ways.
 - More research is needed to understand the best way to visualize the data and what data study participants want to see.
-- Interactive graphics could be a way to engage participants who really want to dig into the data.
+- Interactive graphics are currently being explored as a way for the study team to engage with the data. 
+- Interactive graphics could also be a way to engage participants who really want to understand their data
+  - Drilling down into intra-day data
+  - Understanding changes in weekly summary statistics over time
 
 ---
 
-# Example - Doughnut Charts
+# Beautiful Visualizations
+
+.left-column[
+- Visualization of 4 months of sleep times in a newborn.
+- Blue represents sleep times on a 24-hour clock with each ring representing 1 day.
+]
+
+.right-column[
+
+<img src="include/circular_sleeping_patterns.png" height="450">
+source: <a href="https://www.reddit.com/r/dataisbeautiful/comments/5l39mu/my_daughters_sleeping_patterns_for_the_first_4/dbskzid/" target="_blank">Redditor andrew_elliott</a>
+]
+???
+
+- Daughter's sleeping patterns in the first 4 months of her life. One continuous spiral starting on the inside when she was born, each revolution represents a single day.
+- Could imagine something like this being very interesting and beautiful and published in a scientific journal but not so much for general consumption. Just a pretty picture to most people.
+
+---
+
+# Interactives - Doughnut Charts
 
 ```{r}
 
@@ -303,6 +336,7 @@ act_df %>%
 
 ???
 
+- Doughnut chart is just like a pie chart with a hole in it
 - Way to show percent of time spent in different (mobility) states
 - Click around to show they are interactive and not static
 
@@ -321,6 +355,7 @@ act_df %>%
 
 ???
 
+- Full blown dashboards can be created as HTML files and...
 - Can host this on patient community portal
 - Or can send as a standalone HTML file that allows patients to explore the data
 - We are currently working to understand what our study participants would want to see
@@ -329,7 +364,13 @@ act_df %>%
 
 # Summary
 
-- Inclusion of digital health tools, such as actigraphy, are increasingly used in clinical trials to better understand patient's activities of daily living.
+- Inclusion of digital health tools, such as actigraphy, are increasingly used in clinical trials to better understand patient's activity, sleep, and activities of daily living.
+- If we want to increase voluntary participation, compliance, and engagement we should in my opinion provide some data back to study participants
+  - Need to think carefully about how to do this depending the study objective (during or after study, what type of data is understandable , etc.)
+- Showed an example of how we have **visualized actigraphy data** to create **personalized activity reports** using an **interactive shiny dashboard** in a phase 0 study.
+- Future work will improve upon these reports as we learn what information study participants want to see and as we leverage new technologies for sharing data with study participants.
+
+???
+
 - In addition to using the data for research, that data can be summarized in a way that is value for study participants. 
-  - Showed an example of how we have **visualized actigraphy data** to create **personalized activity reports** in a phase 0 study.
-  - When possible, actigraphy summary data can be shared back with study participants during (or after) the study.
+
